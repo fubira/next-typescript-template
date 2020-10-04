@@ -1,0 +1,16 @@
+node_modules/
+
+lib-cov
+coverage
+*.tgz
+
+.env
+.next
+
+logs
+*.log
+
+*.pid
+*.pid.lock
+
+.vscode
