@@ -15,7 +15,7 @@ const ContainerStyled = styled('div', {
   },
 });
 
-const Container: React.FC<{}> = (props) => {
+const Container: React.FC = props => {
   return <ContainerStyled> {props.children} </ContainerStyled>;
 };
 

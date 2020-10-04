@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    },
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "esnext",

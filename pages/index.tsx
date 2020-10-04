@@ -7,7 +7,7 @@ const Page = styled.div`
   font-family: monospace;
   text-align: center;
 `;
-const Index = () => {
+const Index = (): JSX.Element => {
   return (
     <Page>
       <HelloWorld />

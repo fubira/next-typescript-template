@@ -2,6 +2,6 @@
 
 exports[`HelloWorld should render correctly 1`] = `
 <div>
-  Hello World
+  おはようございます
 </div>
 `;

@@ -1,14 +1,19 @@
 import React, { Fragment } from 'react';
+import { NextPageContext } from 'next';
 import Index from './index';
 import '../css/index.scss';
 
 class Error extends React.Component<{ statusCode: number }> {
-  static getInitialProps({ res, err }: any) {
-    const statusCode = res ? res.statusCode : err ? err.statusCode : null;
+  static getInitialProps(
+    context: NextPageContext
+  ): { statusCode: number | undefined } {
+    const { res, err } = context;
+    const statusCode = res ? res.statusCode : err ? err.statusCode : undefined;
+
     return { statusCode };
   }
 
-  getResponse(statusCode: number) {
+  getResponse(statusCode: number): JSX.Element {
     switch (statusCode) {
       case 404:
         console.log('Rendering home');
@@ -25,7 +30,7 @@ class Error extends React.Component<{ statusCode: number }> {
     }
   }
 
-  render() {
+  render(): JSX.Element {
     return <Fragment>{this.getResponse(this.props.statusCode)}</Fragment>;
   }
 }

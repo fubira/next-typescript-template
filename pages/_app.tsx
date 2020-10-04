@@ -5,7 +5,7 @@ import { initGA, logPageView } from '../utils/analytics';
 import Head from 'next/head';
 
 export default class MyApp extends App {
-  componentDidMount() {
+  componentDidMount(): void {
     initGA();
     logPageView();
 
@@ -14,7 +14,7 @@ export default class MyApp extends App {
     }
   }
 
-  render() {
+  render(): JSX.Element {
     const { Component, pageProps } = this.props;
     return (
       <div>
