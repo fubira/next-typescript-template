@@ -23,6 +23,7 @@
     "prettier:write": "prettier --write \"./**/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@types/styletron-react": "^5.0.2",
     "@zeit/next-sass": "^1.0.1",
     "baseui": "^9.101.0",
     "next-routes": "^1.4.2",
