@@ -1,4 +1,10 @@
-import Document, { DocumentContext, DocumentInitialProps } from 'next/document';
+import Document, {
+  DocumentContext,
+  DocumentInitialProps,
+  Main,
+  NextScript,
+} from 'next/document';
+import Head from 'next/head';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -27,5 +33,21 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render(): JSX.Element {
+    return (
+      <html>
+        <Head>
+          <meta name="theme-color" content="#000000" />
+          <meta name="description" content="Next Typescript Template" />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+          <p>あいうえお</p>
+        </body>
+      </html>
+    );
   }
 }
