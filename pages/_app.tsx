@@ -1,6 +1,9 @@
 import React from 'react';
 import App from 'next/app';
 import Router from 'next/router';
+import { Provider as StyletronProvider } from 'styletron-react';
+
+import { styletron, debug } from '../styletron';
 import { initGA, logPageView } from '../utils/analytics';
 import Head from 'next/head';
 
@@ -17,15 +20,15 @@ export default class MyApp extends App {
   render(): JSX.Element {
     const { Component, pageProps } = this.props;
     return (
-      <div>
+      <StyletronProvider value={styletron} debug={debug} debugAfterHydration>
         <Head>
-          <title>Alejandro Pacheco</title>
+          <title>next-typescript-template</title>
           <link rel="manifest" href="/static/manifest.json" />
           <meta name="theme-color" content="#FFFFFF" />
           <meta name="description" content="content" />
         </Head>
         <Component {...pageProps} />
-      </div>
+      </StyletronProvider>
     );
   }
 }

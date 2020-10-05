@@ -1,53 +1,56 @@
 import Document, {
   DocumentContext,
   DocumentInitialProps,
+  Head,
+  Html,
   Main,
   NextScript,
 } from 'next/document';
-import Head from 'next/head';
-import { ServerStyleSheet } from 'styled-components';
+import { Provider as StyletronProvider } from 'styletron-react';
+import { Server, Sheet } from 'styletron-engine-atomic';
+import { styletron } from '@/styletron';
 
-export default class MyDocument extends Document {
+declare type MyInitialProps = DocumentInitialProps & {
+  stylesheets?: Sheet[];
+};
+
+class MyDocument extends Document {
   static async getInitialProps(
-    ctx: DocumentContext
-  ): Promise<DocumentInitialProps> {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App: any) => (props: any) =>
-            sheet.collectStyles(<App {...props} />),
-        });
+    context: DocumentContext
+  ): Promise<MyInitialProps> {
+    const page = context.renderPage(App => props => (
+      <StyletronProvider value={styletron}>
+        <App {...props} />
+      </StyletronProvider>
+    ));
 
-      const initialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      };
-    } finally {
-      sheet.seal();
-    }
+    const stylesheets = (styletron as Server).getStylesheets() || [];
+    return { ...page, stylesheets };
   }
 
   render(): JSX.Element {
+    const stylesheets = (this.props as MyInitialProps).stylesheets || [];
     return (
-      <html>
+      <Html>
         <Head>
-          <meta name="theme-color" content="#000000" />
-          <meta name="description" content="Next Typescript Template" />
+          {stylesheets.map((sheet, i) => (
+            <style
+              className="_styletron_hydrate_"
+              dangerouslySetInnerHTML={{ __html: sheet.css }}
+              media={sheet.attrs.media}
+              data-hydrate={sheet.attrs['data-hydrate']}
+              key={i}
+            />
+          ))}
         </Head>
-        <body>
+
+        <body dir="ltr">
           <Main />
           <NextScript />
-          <p>あいうえお</p>
         </body>
-      </html>
+      </Html>
     );
   }
 }
+
+export default MyDocument;

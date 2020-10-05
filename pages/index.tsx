@@ -1,17 +1,13 @@
-import '../css/index.scss';
-import HelloWorld from '../components/HelloWorld';
-import styled from 'styled-components';
+import '@/css/index.scss';
+import Head from 'next/head';
+import Container from '@/components/container';
+import HelloWorld from '@/components/HelloWorld';
 
-const Page = styled.div`
-  margin-top: 10vh;
-  font-family: monospace;
-  text-align: center;
-`;
 const Index = (): JSX.Element => {
   return (
-    <Page>
+    <Container>
       <HelloWorld />
-    </Page>
+    </Container>
   );
 };
 
