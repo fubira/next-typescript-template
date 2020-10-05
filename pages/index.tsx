@@ -6,6 +6,9 @@ import HelloWorld from '@/components/HelloWorld';
 const Index = (): JSX.Element => {
   return (
     <Container>
+      <Head>
+        <title> Home | VELOX </title>
+      </Head>
       <HelloWorld />
     </Container>
   );
